@@ -8,11 +8,11 @@ using namespace TgBot;
 const string your_user_name = "PUT YOUR USERNAME HERE";
 
 int main() {
-    Bot bot("5593232178:AAEOgUVw1x1u5mSSFxBhYV2pdj-0l-dvfYg");
+    Bot bot("PUT YOUR TOKEN HERE");
 
     bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
         if (message->chat->username != your_user_name) {
-            bot.getApi().sendMessage(message->chat->id, "FUCK YOU");
+            bot.getApi().sendMessage(message->chat->id, "YOU DONT HAVE PERMISSIONS TO USE THIS");
 
         } else {
             bot.getApi().sendMessage(message->chat->id, "Hi! ");
@@ -23,7 +23,7 @@ int main() {
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
         if (message->chat->username != your_user_name) {
 
-            bot.getApi().sendMessage(message->chat->id, "FUCK YOU");
+            bot.getApi().sendMessage(message->chat->id, "YOU DONT HAVE PERMISSIONS TO USE THIS");
 
         } else {
 
