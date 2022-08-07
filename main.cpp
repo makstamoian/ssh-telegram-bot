@@ -48,35 +48,35 @@ int main() {
     });
 
 
-try {
-cout << "Bot username is: " << bot.
+    try {
+        cout << "Bot username is: " << bot.
 
-getApi()
+                        getApi()
 
-.getMe()->username.
+                .getMe()->username.
 
-c_str()
+                        c_str()
 
-<<
-endl;
-TgLongPoll longPoll(bot);
-while (true) {
-cout << "Long poll started" <<
-endl;
-longPoll.
+             <<
+             endl;
+        TgLongPoll longPoll(bot);
+        while (true) {
+            cout << "Long poll started" <<
+                 endl;
+            longPoll.
 
-start();
+                    start();
 
-}
-} catch (
-TgBot::TgException &e
-) {
-cout << "error: " << e.
+        }
+    } catch (
+            TgBot::TgException &e
+    ) {
+        cout << "error: " << e.
 
-what()
+                what()
 
-<<
-endl;
-}
-return 0;
+             <<
+             endl;
+    }
+    return 0;
 }
