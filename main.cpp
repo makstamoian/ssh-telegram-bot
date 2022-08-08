@@ -10,7 +10,7 @@ const string your_user_name = "PUT YOUR USERNAME HERE";
 int main() {
     Bot bot("PUT YOUR TOKEN HERE");
 
-    bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
+    bot.getEvents().onCommand("start", [&bot](const TgBot::Message::Ptr message) {
         if (message->chat->username != your_user_name) {
             bot.getApi().sendMessage(message->chat->id, "YOU DONT HAVE PERMISSIONS TO USE THIS");
 
@@ -20,7 +20,7 @@ int main() {
     });
 
 
-    bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
+    bot.getEvents().onAnyMessage([&bot](const TgBot::Message::Ptr message) {
         if (message->chat->username != your_user_name) {
 
             bot.getApi().sendMessage(message->chat->id, "YOU DONT HAVE PERMISSIONS TO USE THIS");
@@ -49,34 +49,19 @@ int main() {
 
 
     try {
-        cout << "Bot username is: " << bot.
+        cout << "Bot username is: " << bot.getApi().getMe()->username.c_str() << endl;
 
-                        getApi()
-
-                .getMe()->username.
-
-                        c_str()
-
-             <<
-             endl;
         TgLongPoll longPoll(bot);
-        while (true) {
-            cout << "Long poll started" <<
-                 endl;
-            longPoll.
 
-                    start();
+        while (true) {
+            cout << "Long poll started" << endl;
+            longPoll.start();
 
         }
     } catch (
             TgBot::TgException &e
     ) {
-        cout << "error: " << e.
-
-                what()
-
-             <<
-             endl;
+        cout << "error: " << e.what() << endl;
     }
     return 0;
 }
