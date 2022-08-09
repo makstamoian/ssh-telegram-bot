@@ -1,18 +1,50 @@
 #include <iostream>
 #include <fstream>
 #include <tgbot/tgbot.h>
+#include <string>
 
 using namespace std;
 using namespace TgBot;
 
-const string your_user_name = "PUT YOUR USERNAME HERE";
+void help() {
+    cout << "--token <token> - to specify bot token" << endl << endl;
+    cout << "--username <username> - to specify user, which can use bot" << endl << endl;
+    cout << "--help - to get help" << endl;
+}
 
-int main() {
-    Bot bot("PUT YOUR TOKEN HERE");
+int main(int argc, char *argv[]) {
 
-    bot.getEvents().onCommand("start", [&bot](const TgBot::Message::Ptr message) {
+    string your_user_name;
+
+    string token;
+
+    for (int i = 0; i < argc; i++) {
+
+        if (strcmp(argv[i], "--username") == 0) {
+            your_user_name = argv[i + 1];
+        }
+
+        if (strcmp(argv[i], "--token") == 0) {
+            token = argv[i + 1];
+        }
+
+        if (strcmp(argv[i], "--help") == 0) {
+            help();
+            return 0;
+        }
+
+    }
+
+    cout << "Only " << your_user_name << " can use your bot" << endl;
+    cout << "Token: " << token << endl;
+
+    Bot bot(token);
+
+    bot.getEvents().onCommand("start", [&bot, &your_user_name](const TgBot::Message::Ptr message) {
+
+
         if (message->chat->username != your_user_name) {
-            bot.getApi().sendMessage(message->chat->id, "YOU DONT HAVE PERMISSIONS TO USE THIS");
+            bot.getApi().sendMessage(message->chat->id, "FUCK YOU");
 
         } else {
             bot.getApi().sendMessage(message->chat->id, "Hi! ");
@@ -20,10 +52,10 @@ int main() {
     });
 
 
-    bot.getEvents().onAnyMessage([&bot](const TgBot::Message::Ptr message) {
+    bot.getEvents().onAnyMessage([&bot, &your_user_name](const TgBot::Message::Ptr &message) {
         if (message->chat->username != your_user_name) {
 
-            bot.getApi().sendMessage(message->chat->id, "YOU DONT HAVE PERMISSIONS TO USE THIS");
+            bot.getApi().sendMessage(message->chat->id, "FUCK YOU");
 
         } else {
 
