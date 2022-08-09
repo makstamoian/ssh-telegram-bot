@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 
 
         if (message->chat->username != your_user_name) {
-            bot.getApi().sendMessage(message->chat->id, "FUCK YOU");
+            bot.getApi().sendMessage(message->chat->id, "YOU DONT HAVE PERMISSIONS TO USE THIS");
 
         } else {
             bot.getApi().sendMessage(message->chat->id, "Hi! ");
@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
     bot.getEvents().onAnyMessage([&bot, &your_user_name](const TgBot::Message::Ptr &message) {
         if (message->chat->username != your_user_name) {
 
-            bot.getApi().sendMessage(message->chat->id, "FUCK YOU");
+            bot.getApi().sendMessage(message->chat->id, "YOU DONT HAVE PERMISSIONS TO USE THIS");
 
         } else {
 
