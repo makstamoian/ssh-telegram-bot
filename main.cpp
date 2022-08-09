@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
         } else {
 
             cout << message->chat->username << ": " << message->text << endl;
-            string command = message->text + " > output.txt";
+            string command = message->text + " > output.txt" + " 2>&1";
             const char *command_char = command.c_str();
             system(command_char);
             string output;
